@@ -1,0 +1,376 @@
+:root {
+    --bg-a: #f3f7f6;
+    --bg-b: #e5eef7;
+    --bg-c: #eef3ea;
+
+    --ink-strong: #182338;
+    --ink: #24324a;
+    --muted: #6a7891;
+
+    --brand: #1f8a70;
+    --brand-dark: #146b56;
+    --brand-soft: rgba(31, 138, 112, 0.12);
+
+    --accent: #4c74e6;
+    --accent-soft: rgba(76, 116, 230, 0.12);
+
+    --panel: rgba(255, 255, 255, 0.72);
+    --panel-strong: rgba(255, 255, 255, 0.88);
+    --line: rgba(24, 35, 56, 0.08);
+
+    --user-bubble: linear-gradient(135deg, #18314b, #224a6b);
+    --bot-bubble: rgba(255, 255, 255, 0.94);
+
+    --shadow-xl: 0 30px 70px rgba(24, 35, 56, 0.14);
+    --shadow-lg: 0 18px 40px rgba(24, 35, 56, 0.10);
+    --shadow-md: 0 10px 24px rgba(24, 35, 56, 0.08);
+
+    --radius-xl: 30px;
+    --radius-lg: 22px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 10% 10%, rgba(31, 138, 112, 0.18), transparent 22%),
+        radial-gradient(circle at 88% 16%, rgba(76, 116, 230, 0.16), transparent 22%),
+        radial-gradient(circle at 78% 82%, rgba(31, 138, 112, 0.10), transparent 18%),
+        linear-gradient(135deg, var(--bg-a), var(--bg-b) 46%, var(--bg-c));
+    overflow-x: hidden;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: auto;
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(12px);
+}
+
+body::before {
+    width: 260px;
+    height: 260px;
+    top: 80px;
+    right: -40px;
+    background: rgba(76, 116, 230, 0.12);
+}
+
+body::after {
+    width: 320px;
+    height: 320px;
+    left: -80px;
+    bottom: 30px;
+    background: rgba(31, 138, 112, 0.10);
+}
+
+.app-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1220px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 36px 0;
+    display: grid;
+    grid-template-columns: 0.95fr 1.25fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.hero {
+    position: sticky;
+    top: 24px;
+    padding: 32px 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.58));
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: -80px auto auto -80px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(31, 138, 112, 0.10);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(76, 116, 230, 0.10);
+}
+
+.eyebrow {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    margin: 0 0 16px;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    color: var(--brand-dark);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: 10ch;
+    color: var(--ink-strong);
+    font-size: clamp(2.5rem, 5vw, 4.8rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 36ch;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.chat-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+    box-shadow: var(--shadow-xl);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 560px;
+    max-height: 72vh;
+    padding: 24px;
+    overflow-y: auto;
+    background:
+        linear-gradient(180deg, rgba(248, 251, 255, 0.72), rgba(243, 248, 245, 0.82)),
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 62px,
+            rgba(24, 35, 56, 0.018) 62px,
+            rgba(24, 35, 56, 0.018) 63px
+        );
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(31, 138, 112, 0.22);
+    border-radius: 999px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.message {
+    display: flex;
+    white-space: pre-line;
+    animation: messageIn 220ms ease-out;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message-bubble {
+    max-width: min(80%, 640px);
+    padding: 15px 16px;
+    border-radius: var(--radius-lg);
+    font-size: 0.97rem;
+    line-height: 1.65;
+    box-shadow: var(--shadow-md);
+}
+
+.message.bot .message-bubble {
+    background: var(--bot-bubble);
+    color: var(--ink);
+    border: 1px solid rgba(24, 35, 56, 0.05);
+    border-bottom-left-radius: 8px;
+}
+
+.message.user .message-bubble {
+    background: var(--user-bubble);
+    color: #f7fbff;
+    border-bottom-right-radius: 8px;
+}
+
+.chat-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.82));
+}
+
+.chat-form textarea {
+    min-height: 60px;
+    resize: none;
+    border: 1px solid rgba(24, 35, 56, 0.10);
+    border-radius: 18px;
+    padding: 16px 18px;
+    font: inherit;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: inset 0 1px 2px rgba(24, 35, 56, 0.04);
+    transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.chat-form textarea::placeholder {
+    color: #8190a6;
+}
+
+.chat-form textarea:focus {
+    outline: none;
+    border-color: rgba(31, 138, 112, 0.38);
+    box-shadow: 0 0 0 4px rgba(31, 138, 112, 0.12);
+    transform: translateY(-1px);
+}
+
+.chat-form button {
+    min-width: 138px;
+    border: 0;
+    border-radius: 18px;
+    padding: 0 24px;
+    font: inherit;
+    font-weight: 800;
+    color: #ffffff;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+    box-shadow: 0 16px 28px rgba(20, 107, 86, 0.22);
+    transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.chat-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 30px rgba(20, 107, 86, 0.24);
+}
+
+.chat-form button:disabled {
+    cursor: wait;
+    opacity: 0.72;
+    transform: none;
+    box-shadow: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 980px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        position: relative;
+        top: 0;
+    }
+
+    .hero h1 {
+        max-width: none;
+    }
+
+    .chat-messages {
+        min-height: 420px;
+    }
+}
+
+@media (max-width: 720px) {
+    .app-shell {
+        width: min(100% - 18px, 1220px);
+        padding: 18px 0;
+        gap: 18px;
+    }
+
+    .hero {
+        padding: 24px 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 11vw, 3rem);
+    }
+
+    .hero-copy {
+        font-size: 0.96rem;
+    }
+
+    .chat-messages {
+        min-height: 340px;
+        padding: 18px;
+    }
+
+    .chat-form {
+        grid-template-columns: 1fr;
+        padding: 16px 18px 18px;
+    }
+
+    .chat-form button {
+        min-height: 52px;
+        width: 100%;
+    }
+
+    .message-bubble {
+        max-width: 92%;
+    }
+}
+
